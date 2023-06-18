@@ -1,0 +1,15 @@
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\bin\Debug\net6.0\HRManagementApp.exe
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\bin\Debug\net6.0\HRManagementApp.deps.json
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\bin\Debug\net6.0\HRManagementApp.runtimeconfig.json
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\bin\Debug\net6.0\HRManagementApp.dll
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\bin\Debug\net6.0\HRManagementApp.pdb
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.csproj.AssemblyReference.cache
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.AssemblyInfoInputs.cache
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.AssemblyInfo.cs
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.csproj.CoreCompileInputs.cache
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.dll
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\refint\HRManagementApp.dll
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.pdb
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\HRManagementApp.genruntimeconfig.cache
+C:\Users\nabeen\source\repos\HRManagementApp\HRManagementApp\obj\Debug\net6.0\ref\HRManagementApp.dll
