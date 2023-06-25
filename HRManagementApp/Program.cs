@@ -49,10 +49,12 @@ namespace HRManagementAPP
                         PayEmployee();
                         break;
                     case "4":
-                        Console.WriteLine("Changing the hourly rate:");                        
+                        Console.WriteLine("Changing the hourly rate:");
+                        ChangeHourlyRate();
                         break;
                     case "5":
                         Console.WriteLine("Give bonus:");
+                        GiveBonus();
                         break;
                     case "6":
                         Console.WriteLine("Showing current employee list:");
@@ -70,25 +72,69 @@ namespace HRManagementAPP
             while (userSelection != "9");
         }
 
-        private static void PayEmployee()
+        private static void GiveBonus()
         {
-            Console.WriteLine("Select one of the employee to pay. Select 1 for the first employee, 2 for the second and so on.");
-            // show all the employee
-            for (int i = 1; i <= employees.Count; i++)
+            Console.WriteLine("Select one of the employee to give bonus. Select 1 for the first employee, 2 for the second and so on.");
+            // make sure employee list is not empty
+            if (employees.Count > 0)
             {
-                Console.WriteLine($"{i}. Employee {employees[i - 1].FirstName} {employees[i - 1].LastName}");
+                // capture which employee's we selected
+                int employeeIndex = SelectedEmployeeFromList();
+
+                if (employeeIndex >= 0 && employeeIndex < employees.Count)
+                {
+                    // capture how much bonus would the employee have
+                    Console.WriteLine($"Now enter bonus amount the employee {employees[employeeIndex].FirstName} {employees[employeeIndex].LastName} will have: ");
+                    string bonus = Console.ReadLine();
+                    double bonusAmount = int.Parse(bonus);
+
+                    employees[employeeIndex].bonus = bonusAmount;
+
+                    Console.WriteLine($"{employees[employeeIndex].FirstName} {employees[employeeIndex].LastName} has now bonus amonut of {employees[employeeIndex].bonus}");
+
+                }
+                else
+                    Console.WriteLine($"You selected wrong value. Please select between 1 and {employees.Count} number");
+
             }
 
         }
 
-        private static void RegisterWorkHours()
+        private static void ChangeHourlyRate()
         {
-            Console.WriteLine("Select one of the employee to add work hours. Select 1 for the first employee, 2 for the second and so on.");
+            Console.WriteLine("Select one of the employee to change their hourly rate. Select 1 for the first employee, 2 for the second and so on.");
+            // make sure employee list is not empty
+            if (employees.Count > 0)
+            {
+                // capture which employee's we selected
+                int employeeIndex = SelectedEmployeeFromList();
 
+                if (employeeIndex >= 0 && employeeIndex < employees.Count)
+                {
+                    // capture the rate change for the employee
+                    double prevRate = employees[employeeIndex].HourlyRate;
+                    Console.WriteLine($"Now enter new hourly rate the employee {employees[employeeIndex].FirstName} {employees[employeeIndex].LastName} will have: ");
+                    string rate = Console.ReadLine();
+                    double hourlyRate = int.Parse(rate);
+
+                    employees[employeeIndex].HourlyRate = hourlyRate;
+
+                    Console.WriteLine($"{employees[employeeIndex].FirstName} {employees[employeeIndex].LastName} has his rate changed from {prevRate} to {employees[employeeIndex].HourlyRate} now");
+                }
+                else
+                    Console.WriteLine($"You selected wrong value. Please select between 1 and {employees.Count} number");
+
+            }
+        }
+
+        // always have if (employees.Count > 0) when calling this method for defensive coding
+        private static int SelectedEmployeeFromList()
+        {
+            int employeeIndex=0;
             // show all the employee
             for (int i = 1; i <= employees.Count; i++)
             {
-                Console.WriteLine($"{i}. Employee {employees[i-1].FirstName} {employees[i - 1].LastName}");
+                Console.WriteLine($"{i}. Employee {employees[i - 1].FirstName} {employees[i - 1].LastName}");
             }
 
             // make sure employee list is not empty
@@ -96,18 +142,55 @@ namespace HRManagementAPP
             {
                 // capture which employee's we selected
                 string whichEmployee = Console.ReadLine();
-                int employeeIndex = int.Parse(whichEmployee);
+                return (int.Parse(whichEmployee) - 1);
+            }
 
-                if (employeeIndex >= 1 && employeeIndex <= employees.Count) 
+            return employeeIndex;
+
+        }
+
+        private static void PayEmployee()
+        {
+            Console.WriteLine("Select one of the employee to pay. Select 1 for the first employee, 2 for the second and so on.");
+            // make sure employee list is not empty
+            if (employees.Count > 0)
+            {
+                // capture which employee's we selected
+                int employeeIndex = SelectedEmployeeFromList();
+
+                if (employeeIndex >= 0 && employeeIndex < employees.Count)
+                {
+                    // capture how much the employee worked and pay him
+                    double paid = employees[employeeIndex].PayEmployee();
+                    Console.WriteLine($"Employee is paid {paid}");
+                    Console.WriteLine($"Employee work hour is now {employees[employeeIndex].WorkHours}");
+                }
+                else
+                    Console.WriteLine($"You selected wrong value. Please select between 1 and {employees.Count} number");
+
+            }
+        }
+
+        private static void RegisterWorkHours()
+        {
+            Console.WriteLine("Select one of the employee to add work hours. Select 1 for the first employee, 2 for the second and so on.");
+
+            // make sure employee list is not empty
+            if (employees.Count > 0)
+            {
+                // capture which employee's we selected
+                int employeeIndex = SelectedEmployeeFromList();
+
+                if (employeeIndex >= 0 && employeeIndex <= employees.Count) 
                 {
                     // capture how much the employee worked and add it to the class
-                    Console.WriteLine($"Now enter how many hours the employee {employees[employeeIndex - 1].FirstName} {employees[employeeIndex - 1].LastName} worked: ");
+                    Console.WriteLine($"Now enter how many hours the employee {employees[employeeIndex].FirstName} {employees[employeeIndex].LastName} worked: ");
                     string hoursWorked = Console.ReadLine();
                     double hours = int.Parse(hoursWorked);
 
-                    double resultHours = employees[employeeIndex - 1].EmployeeWorkHours(hours);
+                    double resultHours = employees[employeeIndex].EmployeeWorkHours(hours);
 
-                    Console.WriteLine($"{employees[employeeIndex - 1].FirstName} {employees[employeeIndex - 1].LastName} has now worked {resultHours} hours in total");
+                    Console.WriteLine($"{employees[employeeIndex].FirstName} {employees[employeeIndex].LastName} has now worked {resultHours} hours in total");
                 } else
                     Console.WriteLine($"You selected wrong value. Please select between 1 and {employees.Count} number");
 
@@ -124,6 +207,7 @@ namespace HRManagementAPP
             string firstName;
             string lastName;
             double hourlyRate;
+            double workHours;
 
             //showing list of employees and their details from the list of the employee class
             for (int i = 0; i< employees.Count; i++)
@@ -131,7 +215,8 @@ namespace HRManagementAPP
                 firstName = employees[i].FirstName;
                 lastName = employees[i].LastName;
                 hourlyRate = employees[i].HourlyRate;
-                Console.WriteLine($"Employee {firstName} {lastName} has hourly rate of {hourlyRate}");
+                workHours = employees[i].WorkHours;
+                Console.WriteLine($"Employee {firstName} {lastName} has hourly rate of {hourlyRate} and worked {workHours} hours");
             }
 
 
